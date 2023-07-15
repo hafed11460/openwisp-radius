@@ -73,11 +73,11 @@ class RadiusCheckAdmin(MultitenantAdminMixin, TimeStampedEditableAdmin):
         'modified',
     ]
     search_fields = ['username', 'value']
-    list_filter = [
-        MultitenantOrgFilter,
-        'created',
-        'modified',
-    ]
+    # list_filter = [
+    #     MultitenantOrgFilter,
+    #     'created',
+    #     'modified',
+    # ]
     fields = [
         'mode',
         'organization',
@@ -104,7 +104,7 @@ class RadiusReplyAdmin(MultitenantAdminMixin, TimeStampedEditableAdmin):
         'created',
         'modified',
     ]
-    list_filter = (MultitenantOrgFilter,)
+    # list_filter = (MultitenantOrgFilter,)
     fields = [
         'mode',
         'organization',
@@ -143,7 +143,7 @@ class RadiusAccountingAdmin(OrganizationFirstMixin, BaseAccounting):
         'called_station_id',
         'nas_ip_address',
     ]
-    list_filter = ['start_time', 'stop_time', MultitenantOrgFilter]
+    # list_filter = ['start_time', 'stop_time', MultitenantOrgFilter]
     ordering = ['-start_time']
 
 
@@ -177,7 +177,7 @@ class NasAdmin(MultitenantAdminMixin, TimeStampedEditableAdmin):
         'created',
         'modified',
     ]
-    list_filter = (MultitenantOrgFilter,)
+    # list_filter = (MultitenantOrgFilter,)
 
 
 class RadiusGroupCheckInline(TimeReadonlyAdminMixin, StackedInline):
@@ -204,7 +204,7 @@ class RadiusGroupAdmin(OrganizationFirstMixin, TimeStampedEditableAdmin):
         'modified',
     ]
     search_fields = ['name']
-    list_filter = (MultitenantOrgFilter,)
+    # list_filter = (MultitenantOrgFilter,)
     inlines = [RadiusGroupCheckInline, RadiusGroupReplyInline]
     select_related = ('organization',)
 
@@ -322,11 +322,11 @@ class RadiusPostAuthAdmin(OrganizationFirstMixin, BasePostAuth):
         'called_station_id',
         'date',
     ]
-    list_filter = [
-        'date',
-        'reply',
-        MultitenantOrgFilter,
-    ]
+    # list_filter = [
+    #     'date',
+    #     'reply',
+    #     MultitenantOrgFilter,
+    # ]
     search_fields = ['username', 'reply', 'calling_station_id', 'called_station_id']
     exclude = ['id']
     ordering = ['-date']
@@ -356,10 +356,10 @@ class RadiusBatchAdmin(MultitenantAdminMixin, TimeStampedEditableAdmin):
         'created',
         'modified',
     ]
-    list_filter = [
-        'strategy',
-        MultitenantOrgFilter,
-    ]
+    # list_filter = [
+    #     'strategy',
+    #     MultitenantOrgFilter,
+    # ]
     search_fields = ['name']
     form = RadiusBatchForm
     help_text = {
@@ -520,7 +520,7 @@ UserAdmin.inlines += [
     RadiusUserGroupInline,
     PhoneTokenInline,
 ]
-UserAdmin.list_filter += (RegisteredUserFilter, 'registered_user__method')
+# UserAdmin.list_filter += (RegisteredUserFilter, 'registered_user__method')
 
 
 def get_is_verified(self, obj):
@@ -640,5 +640,5 @@ if settings.DEBUG:
         list_display = ['key', 'user', 'created']
         fields = ['user', 'organization', 'can_auth']
         ordering = ('-created',)
-        list_filter = [MultitenantOrgFilter]
+        # list_filter = [MultitenantOrgFilter]
         autocomplete_fields = ('user',)
